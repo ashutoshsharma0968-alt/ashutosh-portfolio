@@ -1,8 +1,8 @@
 export const profile = {
   name: 'Ashutosh Kumar Sharma',
   shortName: 'Ashutosh Sharma',
-  role: 'Computer Science Student · Aspiring Full-Stack Developer',
-  location: 'India',
+  role: 'Computer Science Student At "Arka jain university"· Aspiring Full-Stack Developer',
+  location: 'Jamshedpur,jharkhand,India',
   email: 'ashutoshsharma0968@gmail.com', // Replace this before publishing
   linkedin: 'https://www.linkedin.com/in/ashutoshsharma45/',
   github: 'https://github.com/ashutoshsharma0968-alt',// Replace this before publishing
