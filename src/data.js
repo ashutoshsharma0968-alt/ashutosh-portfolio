@@ -1,14 +1,16 @@
+
 export const profile = {
   name: 'Ashutosh Kumar Sharma',
   shortName: 'Ashutosh Sharma',
-  role: 'Computer Science Student At "Arka jain university"· Aspiring Full-Stack Developer',
-  location: 'Jamshedpur,jharkhand,India',
-  email: 'ashutoshsharma0968@gmail.com', // Replace this before publishing
+  role: 'B.Tech Student at Arka Jain University · Aspiring Full-Stack Developer',
+  location: 'Jamshedpur, Jharkhand, India',
+  email: 'ashutoshsharma0968@gmail.com',
   linkedin: 'https://www.linkedin.com/in/ashutoshsharma45/',
-  github: 'https://github.com/ashutoshsharma0968-alt',// Replace this before publishing
-  resume: '/resume.pdf', // Add your PDF to public/resume.pdf
+  github: 'https://github.com/ashutoshsharma0968-alt',
+  resume: '/resume.pdf',
   intro: 'I build clean, useful digital experiences and explore how AI can solve real-world problems.',
 }
+
 
 export const projects = [
   {
