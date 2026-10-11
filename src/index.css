@@ -64,3 +64,310 @@
     margin-bottom: 24px;
   }
 }
+
+/* ==========================================
+   CYBERPUNK / ANIME GLITCH THEME
+   Add at the END of src/index.css
+========================================== */
+
+:root {
+  --accent: #ff3cac;
+  --cyan: #00f5ff;
+  --line: rgba(0, 245, 255, 0.17);
+}
+
+/* Neon cyberpunk background */
+body {
+  background:
+    radial-gradient(
+      ellipse at 15% 10%,
+      rgba(255, 60, 172, 0.13),
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 90% 35%,
+      rgba(0, 245, 255, 0.10),
+      transparent 32%
+    ),
+    #050509;
+}
+
+/* Animated futuristic grid */
+.site-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.site-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      rgba(0, 245, 255, 0.045) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 60, 172, 0.045) 1px,
+      transparent 1px
+    );
+  background-size: 42px 42px;
+  mask-image: linear-gradient(
+    to bottom,
+    black,
+    transparent 90%
+  );
+  animation: cyber-grid-drift 18s linear infinite;
+}
+
+@keyframes cyber-grid-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 42px 42px;
+  }
+}
+
+/* Subtle scanlines */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0.13;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    rgba(0, 0, 0, 0.45) 4px
+  );
+}
+
+/* Glass navigation with neon border */
+.topbar {
+  border-bottom-color: rgba(0, 245, 255, 0.22);
+  background: rgba(5, 5, 12, 0.88);
+  box-shadow: 0 5px 35px rgba(0, 0, 0, 0.2);
+}
+
+.brand-mark {
+  border-color: rgba(255, 60, 172, 0.65);
+  box-shadow: 0 0 18px rgba(255, 60, 172, 0.13);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--cyan);
+}
+
+.nav-links .active::after {
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+}
+
+/* Neon gradient typography */
+.gradient-text {
+  background: linear-gradient(
+    100deg,
+    #ff3cac 0%,
+    #c850ff 45%,
+    #00f5ff 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: neon-gradient-flow 5s ease infinite;
+}
+
+@keyframes neon-gradient-flow {
+  0%, 100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+}
+
+/* Subtle anime-style glitch flicker */
+.hero h1,
+.page-title {
+  animation: glitch-flicker 7s infinite;
+}
+
+@keyframes glitch-flicker {
+  0%, 94%, 96%, 100% {
+    text-shadow: none;
+    transform: translateX(0);
+  }
+  95% {
+    text-shadow:
+      -2px 0 rgba(255, 60, 172, 0.75),
+      2px 0 rgba(0, 245, 255, 0.75);
+    transform: translateX(1px);
+  }
+}
+
+/* Circular profile photo: neon pulse */
+.profile-photo {
+  border-color: rgba(0, 245, 255, 0.8);
+  box-shadow:
+    0 0 0 5px rgba(255, 60, 172, 0.08),
+    0 0 22px rgba(0, 245, 255, 0.25),
+    0 0 45px rgba(255, 60, 172, 0.16);
+  animation: profile-neon-pulse 4s ease-in-out infinite;
+}
+
+@keyframes profile-neon-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 5px rgba(255, 60, 172, 0.08),
+      0 0 22px rgba(0, 245, 255, 0.25),
+      0 0 45px rgba(255, 60, 172, 0.16);
+  }
+  50% {
+    box-shadow:
+      0 0 0 7px rgba(0, 245, 255, 0.07),
+      0 0 32px rgba(255, 60, 172, 0.36),
+      0 0 58px rgba(0, 245, 255, 0.16);
+  }
+}
+
+/* Cyberpunk buttons */
+.button-primary {
+  background: linear-gradient(100deg, #ff3cac, #c850ff);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 22px rgba(255, 60, 172, 0.22);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
+}
+
+.button-primary:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.13);
+  box-shadow: 0 0 32px rgba(255, 60, 172, 0.42);
+}
+
+.button-ghost {
+  border-color: rgba(0, 245, 255, 0.35);
+}
+
+.button-ghost:hover {
+  border-color: var(--cyan);
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.12);
+}
+
+/* Animated project cards */
+.project-card,
+.info-card,
+.skill-panel,
+.contact-card {
+  position: relative;
+  border-color: rgba(0, 245, 255, 0.13);
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.project-card:hover,
+.info-card:hover,
+.skill-panel:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 60, 172, 0.65);
+  box-shadow:
+    0 0 0 1px rgba(255, 60, 172, 0.08),
+    0 12px 40px rgba(255, 60, 172, 0.09),
+    0 0 25px rgba(0, 245, 255, 0.06);
+}
+
+.project-visual {
+  background-color: #0a0a16;
+}
+
+.project-card:hover .visual-orb {
+  box-shadow:
+    0 0 30px rgba(255, 60, 172, 0.4),
+    0 0 65px rgba(0, 245, 255, 0.2),
+    inset 0 0 20px rgba(255, 255, 255, 0.12);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Neon section details */
+.eyebrow,
+.skill-index,
+.project-links a:hover {
+  color: var(--cyan);
+}
+
+.availability-dot {
+  box-shadow: 0 0 14px #00f5ff99;
+}
+
+.art-card {
+  border-color: rgba(255, 60, 172, 0.3);
+  box-shadow:
+    0 25px 100px #0009,
+    0 0 35px rgba(255, 60, 172, 0.07);
+}
+
+.art-ring {
+  border-color: rgba(255, 60, 172, 0.22);
+}
+
+.ring-two {
+  border-color: rgba(0, 245, 255, 0.2);
+}
+
+.cta-section {
+  border-color: rgba(255, 60, 172, 0.28);
+  background:
+    radial-gradient(
+      ellipse at 90% 20%,
+      rgba(0, 245, 255, 0.08),
+      transparent 45%
+    ),
+    linear-gradient(110deg, #15101e, #0a1019);
+}
+
+.contact-icon {
+  color: var(--cyan);
+  border-color: rgba(0, 245, 255, 0.25);
+  background: rgba(0, 245, 255, 0.06);
+}
+
+.ticker {
+  border-color: rgba(255, 60, 172, 0.22);
+}
+
+/* Keep animations comfortable on smaller screens */
+@media (max-width: 650px) {
+  .site-shell::before {
+    background-size: 30px 30px;
+  }
+
+  .project-card:hover,
+  .info-card:hover,
+  .skill-panel:hover {
+    transform: translateY(-3px);
+  }
+}
+
+/* Respect reduced-motion accessibility setting */
+@media (prefers-reduced-motion: reduce) {
+  .site-shell::before,
+  .gradient-text,
+  .hero h1,
+  .page-title,
+  .profile-photo {
+    animation: none !important;
+  }
+}
