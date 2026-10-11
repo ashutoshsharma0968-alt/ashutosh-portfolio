@@ -3,9 +3,9 @@ export const profile = {
   shortName: 'Ashutosh Sharma',
   role: 'Computer Science Student · Aspiring Full-Stack Developer',
   location: 'India',
-  email: 'YOUR_EMAIL@example.com', // Replace this before publishing
+  email: 'ashutoshsharma0968@gmail.com', // Replace this before publishing
   linkedin: 'https://www.linkedin.com/in/ashutoshsharma45/',
-  github: 'https://github.com/YOUR_GITHUB_USERNAME', // Replace this before publishing
+  github: 'https://github.com/ashutoshsharma0968-alt',// Replace this before publishing
   resume: '/resume.pdf', // Add your PDF to public/resume.pdf
   intro: 'I build clean, useful digital experiences and explore how AI can solve real-world problems.',
 }
@@ -16,21 +16,21 @@ export const projects = [
     description: 'A university-focused student hub for attendance, notes, assignments, timetables, announcements, and faculty communication.',
     stack: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT'],
     impact: 'Designed around everyday student workflows.',
-    github: 'https://github.com/YOUR_GITHUB_USERNAME', live: '',
+    github: 'https://github.com/ashutoshsharma0968-alt', live: '',
   },
   {
     number: '02', title: 'SmartCare AI', category: 'AI / Web', status: 'Concept / prototype',
     description: 'A healthcare experience concept for appointment tokens, bed availability, and an AI-assisted patient interface.',
     stack: ['React', 'AI integration', 'UI/UX'],
     impact: 'Brings key care journeys into one interface.',
-    github: 'https://github.com/YOUR_GITHUB_USERNAME', live: '',
+    github: 'https://github.com/ashutoshsharma0968-alt', live: '',
   },
   {
     number: '03', title: 'AgroAI', category: 'AI / Web', status: 'Concept / prototype',
     description: 'An agriculture support concept featuring weather, mandi-price information, and conversational assistance for farmers.',
     stack: ['JavaScript', 'APIs', 'AI concept'],
     impact: 'Explores accessible digital tools for agriculture.',
-    github: 'https://github.com/YOUR_GITHUB_USERNAME', live: '',
+    github: 'https://github.com/ashutoshsharma0968-alt', live: '',
   },
 ]
 
