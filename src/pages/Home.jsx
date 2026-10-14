@@ -96,6 +96,8 @@ export default function Home() {
 
   const glowX = useTransform(smoothX, [-1, 1], ['-15%', '115%'])
   const glowY = useTransform(smoothY, [-1, 1], ['-15%', '115%'])
+  const avatarRotateX = useTransform(smoothY, [-1, 1], [10, -10])
+  const avatarRotateY = useTransform(smoothX, [-1, 1], [-14, 14])
 
   function handleMouseMove(event) {
     if (!heroRef.current) return
@@ -156,14 +158,22 @@ export default function Home() {
             <div className="profile-orbit-ring orbit-b" />
             <div className="profile-orbit-ring orbit-c" />
 
-            <motion.img
-              src="/profile.png"
-              alt="Ashutosh Kumar Sharma"
-              className="profile-photo home-profile"
-              initial={{ opacity: 0, scale: 0.65, filter: 'blur(12px)' }}
-              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-              transition={{ duration: 0.9, delay: 0.2 }}
-            />
+            <motion.div
+              className="profile-3d-frame"
+              style={{ rotateX: avatarRotateX, rotateY: avatarRotateY }}
+              animate={{ y: [0, -8, 0] }}
+              transition={{ y: { duration: 4.2, repeat: Infinity, ease: 'easeInOut' } }}
+              whileHover={{ scale: 1.045 }}
+            >
+              <motion.img
+                src="/profile.png"
+                alt="Ashutosh Kumar Sharma"
+                className="profile-photo home-profile"
+                initial={{ opacity: 0, scale: 0.65, filter: 'blur(12px)' }}
+                animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                transition={{ duration: 0.9, delay: 0.2 }}
+              />
+            </motion.div>
 
             <span className="orbit-spark spark-one" />
             <span className="orbit-spark spark-two" />
