@@ -21,11 +21,11 @@ export const projects = [
     github: 'https://github.com/ashutoshsharma0968-alt', live: '',
   },
   {
-    number: '02', title: 'SmartCare AI', category: 'AI / Web', status: 'Concept / prototype',
+    number: '02', title: 'SmartCare AI', category: 'AI / Web', status: 'Live',
     description: 'A healthcare experience concept for appointment tokens, bed availability, and an AI-assisted patient interface.',
     stack: ['React', 'AI integration', 'UI/UX'],
     impact: 'Brings key care journeys into one interface.',
-    github: 'https://github.com/ashutoshsharma0968-alt', live: '',
+    github: 'https://github.com/ashutoshsharma0968-alt/smartcare-ai', live: 'https://smartcare-ai-ivory.vercel.app',
   },
   {
     number: '03', title: 'AgroAI', category: 'AI / Web', status: 'Concept / prototype',
