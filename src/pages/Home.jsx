@@ -165,14 +165,34 @@ export default function Home() {
               transition={{ y: { duration: 4.2, repeat: Infinity, ease: 'easeInOut' } }}
               whileHover={{ scale: 1.045 }}
             >
-              <motion.img
-                src="/profile.png"
-                alt="Ashutosh Kumar Sharma"
-                className="profile-photo home-profile"
+              <motion.div
+                className="developer-avatar-3d"
+                role="img"
+                aria-label="Stylized 3D developer avatar"
                 initial={{ opacity: 0, scale: 0.65, filter: 'blur(12px)' }}
                 animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
                 transition={{ duration: 0.9, delay: 0.2 }}
-              />
+              >
+                <span className="avatar-backlight" />
+                <span className="avatar-shoulders" />
+                <span className="avatar-shirt" />
+                <span className="avatar-neck" />
+                <span className="avatar-ear avatar-ear-left" />
+                <span className="avatar-ear avatar-ear-right" />
+                <span className="avatar-face">
+                  <span className="avatar-hair" />
+                  <span className="avatar-eyebrow avatar-eyebrow-left" />
+                  <span className="avatar-eyebrow avatar-eyebrow-right" />
+                  <span className="avatar-eye avatar-eye-left" />
+                  <span className="avatar-eye avatar-eye-right" />
+                  <span className="avatar-nose" />
+                  <span className="avatar-mouth" />
+                </span>
+                <span className="avatar-jacket avatar-jacket-left" />
+                <span className="avatar-jacket avatar-jacket-right" />
+                <span className="avatar-chain" />
+                <span className="avatar-label">ASHU.DEV</span>
+              </motion.div>
             </motion.div>
 
             <span className="orbit-spark spark-one" />
