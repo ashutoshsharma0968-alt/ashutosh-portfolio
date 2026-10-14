@@ -1351,3 +1351,120 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .avatar3d-orbit-label span, .avatar3d-loading span { animation: none; }
 }
+
+
+/* Cinematic student-developer HUD surrounding the 3D human */
+.avatar3d-stage {
+  height: clamp(500px, 49vw, 630px);
+  overflow: visible;
+  border-radius: 32px;
+  background:
+    radial-gradient(ellipse at 50% 36%, rgba(0,234,255,.12), transparent 34%),
+    radial-gradient(ellipse at 57% 68%, rgba(132,76,255,.15), transparent 56%),
+    linear-gradient(155deg, rgba(14,20,38,.22), rgba(7,10,20,.68));
+  border: 1px solid rgba(130,220,255,.12);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 24px 80px rgba(0,0,0,.22);
+}
+.avatar3d-stage::before, .avatar3d-stage::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  width: 64px; height: 64px;
+  border-color: rgba(0,234,255,.52);
+  border-style: solid;
+}
+.avatar3d-stage::before { top: 13px; left: 13px; border-width: 1px 0 0 1px; }
+.avatar3d-stage::after { right: 13px; bottom: 13px; border-width: 0 1px 1px 0; }
+.avatar3d-canvas { inset: 24px 8px 60px; }
+.avatar3d-canvas canvas { filter: drop-shadow(0 14px 38px rgba(0,234,255,.11)); }
+.avatar3d-vignette {
+  background:
+    linear-gradient(90deg,rgba(7,10,20,.82),rgba(7,10,20,.18) 32%,rgba(7,10,20,.06) 65%,rgba(7,10,20,.66)),
+    linear-gradient(0deg,rgba(7,10,20,.96),transparent 25%,transparent 75%,rgba(7,10,20,.5));
+}
+.avatar3d-grain {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: .13;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+}
+.avatar3d-topline {
+  position: absolute; top: 22px; left: 24px; right: 24px; z-index: 5;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+.avatar3d-orbit-label { position: static; transform: none; font-size: 8px; padding: 8px 10px; letter-spacing: 1.2px; }
+.avatar3d-live-tag {
+  color: rgba(171,255,220,.88); font: 500 8px/1.2 'DM Mono',monospace; letter-spacing: .8px;
+  padding: 8px 10px; border: 1px solid rgba(75,255,177,.18); border-radius: 99px;
+  background: rgba(4,22,22,.52); white-space: nowrap;
+}
+.avatar3d-live-tag:first-letter { color: #4dffb2; }
+.avatar3d-side-data {
+  position: absolute; z-index: 4; top: 33%; display: flex; flex-direction: column; gap: 6px;
+  color: rgba(215,228,249,.68); font: 500 9px/1.4 'DM Mono',monospace; letter-spacing: .2px;
+  text-shadow: 0 2px 12px #070a14;
+}
+.avatar3d-side-data strong { color: #f2f8ff; font: 700 13px/1.25 'Manrope',sans-serif; letter-spacing: .6px; }
+.avatar3d-side-left { left: 20px; align-items: flex-start; }
+.avatar3d-side-right { right: 20px; align-items: flex-end; text-align: right; }
+.avatar3d-index { color: #67e8f9; font: 500 8px/1.3 'DM Mono',monospace; letter-spacing: 1.1px; }
+.avatar3d-rule { width: 36px; height: 1px; margin: 4px 0; background: linear-gradient(90deg,#67e8f9,transparent); }
+.avatar3d-side-right .avatar3d-rule { background: linear-gradient(90deg,transparent,#a78bfa); }
+.avatar3d-student-card {
+  position: absolute; z-index: 6; left: 18px; right: 18px; bottom: 58px;
+  display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+  border: 1px solid rgba(168,208,255,.18); border-radius: 13px;
+  background: linear-gradient(110deg,rgba(8,14,28,.91),rgba(17,21,40,.72));
+  box-shadow: 0 10px 32px rgba(0,0,0,.22), inset 0 1px rgba(255,255,255,.05);
+  backdrop-filter: blur(18px);
+}
+.avatar3d-student-monogram {
+  flex: 0 0 42px; width: 42px; height: 42px; display: grid; place-items: center; position: relative;
+  border: 1px solid rgba(103,232,249,.32); border-radius: 10px;
+  background: linear-gradient(135deg,rgba(0,234,255,.15),rgba(167,139,250,.16));
+  color: #f2fbff; font: 700 15px/1 'Manrope',sans-serif; letter-spacing: -1px;
+}
+.avatar3d-student-monogram span { position: absolute; top: 4px; right: 5px; font-size: 7px; color: #67e8f9; }
+.avatar3d-student-info { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.avatar3d-student-info strong { color: #f4f7ff; font: 700 12px/1.3 'Manrope',sans-serif; }
+.avatar3d-student-info > span:not(.avatar3d-index) { color: rgba(211,222,241,.68); font: 500 8px/1.4 'DM Mono',monospace; }
+.avatar3d-student-status {
+  margin-left: auto; align-self: flex-start; display: flex; align-items: center; gap: 5px;
+  color: #a7f3d0; font: 500 7px/1 'DM Mono',monospace; letter-spacing: .7px; white-space: nowrap;
+}
+.avatar3d-student-status i { width: 5px; height: 5px; border-radius: 50%; background: #4dffb2; box-shadow: 0 0 9px #4dffb2; }
+.avatar3d-contact-strip {
+  position: absolute; z-index: 6; left: 22px; bottom: 24px; display: flex; gap: 15px;
+}
+.avatar3d-contact-strip a {
+  color: rgba(188,226,245,.7); font: 500 8px/1.2 'DM Mono',monospace; letter-spacing: 1px;
+  text-decoration: none; transition: color .2s ease;
+}
+.avatar3d-contact-strip a:hover { color: #67e8f9; }
+.avatar3d-coordinate {
+  right: 20px; bottom: 24px; writing-mode: horizontal-tb; font-size: 7px; letter-spacing: .8px;
+}
+.avatar3d-loading { z-index: 5; }
+@media (max-width: 1050px) {
+  .avatar3d-side-data { top: 29%; }
+  .avatar3d-side-left { left: 12px; }
+  .avatar3d-side-right { right: 12px; }
+  .avatar3d-student-card { left: 12px; right: 12px; padding: 10px; }
+}
+@media (max-width: 600px) {
+  .avatar3d-stage { height: 470px; border-radius: 22px; }
+  .avatar3d-topline { top: 15px; left: 14px; right: 14px; }
+  .avatar3d-live-tag { font-size: 7px; padding: 7px; }
+  .avatar3d-orbit-label { font-size: 7px; padding: 7px; }
+  .avatar3d-side-data { top: 23%; font-size: 7px; gap: 4px; }
+  .avatar3d-side-data strong { font-size: 10px; }
+  .avatar3d-side-left { left: 11px; }
+  .avatar3d-side-right { right: 11px; }
+  .avatar3d-student-card { bottom: 54px; gap: 8px; }
+  .avatar3d-student-monogram { flex-basis: 34px; width: 34px; height: 34px; }
+  .avatar3d-student-info strong { font-size: 10px; }
+  .avatar3d-student-info > span:not(.avatar3d-index) { font-size: 7px; }
+  .avatar3d-student-status { display: none; }
+  .avatar3d-contact-strip { left: 14px; bottom: 20px; gap: 10px; }
+  .avatar3d-contact-strip a { font-size: 7px; }
+  .avatar3d-coordinate { right: 12px; bottom: 20px; font-size: 6px; }
+}
