@@ -168,31 +168,26 @@ export default function Home() {
               <motion.div
                 className="developer-avatar-3d"
                 role="img"
-                aria-label="Stylized 3D developer avatar"
+                aria-label="Interactive 3D portrait using Ashu's existing profile photo"
                 initial={{ opacity: 0, scale: 0.65, filter: 'blur(12px)' }}
                 animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
                 transition={{ duration: 0.9, delay: 0.2 }}
               >
-                <span className="avatar-backlight" />
-                <span className="avatar-shoulders" />
-                <span className="avatar-shirt" />
-                <span className="avatar-neck" />
-                <span className="avatar-ear avatar-ear-left" />
-                <span className="avatar-ear avatar-ear-right" />
-                <span className="avatar-face">
-                  <span className="avatar-hair" />
-                  <span className="avatar-eyebrow avatar-eyebrow-left" />
-                  <span className="avatar-eyebrow avatar-eyebrow-right" />
-                  <span className="avatar-eye avatar-eye-left" />
-                  <span className="avatar-eye avatar-eye-right" />
-                  <span className="avatar-nose" />
-                  <span className="avatar-mouth" />
-                </span>
-                <span className="avatar-jacket avatar-jacket-left" />
-                <span className="avatar-jacket avatar-jacket-right" />
-                <span className="avatar-chain" />
-                <span className="avatar-label">ASHU.DEV</span>
+                <span className="avatar-depth-shadow" />
+                <span className="avatar-photo-backplate" />
+                <img
+                  className="real-human-avatar-photo"
+                  src="/profile.png"
+                  alt="Ashu"
+                  draggable="false"
+                />
+                <span className="avatar-photo-glass" />
+                <span className="avatar-photo-rim" />
+                <span className="avatar-photo-label">ASHU.DEV</span>
               </motion.div>
+            </motion.div>
+
+            <span className="orbit-spark spark-one" />              </motion.div>
             </motion.div>
 
             <span className="orbit-spark spark-one" />
