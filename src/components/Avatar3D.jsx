@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
+import { profile } from '../data'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
 const MODEL_URL = 'https://threejs.org/examples/models/gltf/Xbot.glb'
@@ -17,6 +18,7 @@ export default function Avatar3D() {
     let model
     let mixer
     let clock
+    let modelBaseY = 0
     let pointerX = 0
     let pointerY = 0
     let disposed = false
@@ -111,6 +113,7 @@ export default function Avatar3D() {
         model.scale.setScalar(scale)
         model.position.x = -center.x * scale
         model.position.y = -center.y * scale - 0.03
+        modelBaseY = model.position.y
         model.position.z = -center.z * scale
         model.traverse((child) => {
           if (child.isMesh && child.material) {
@@ -140,7 +143,7 @@ export default function Avatar3D() {
       if (model) {
         model.rotation.y += ((pointerX * 0.5 + Math.sin(elapsed * 0.35) * 0.12) - model.rotation.y) * 0.035
         model.rotation.x += ((-pointerY) - model.rotation.x) * 0.035
-        model.position.y += ((Math.sin(elapsed * 1.2) * 0.045 - 0.03) - model.position.y + model.position.y) * 0.001
+        model.position.y = modelBaseY + Math.sin(elapsed * 1.2) * 0.045
       }
       halo.rotation.z = elapsed * 0.12
       haloBack.rotation.z = -elapsed * 0.08
@@ -168,19 +171,53 @@ export default function Avatar3D() {
   }, [])
 
   return (
-    <div className="avatar3d-stage" aria-label="Interactive animated 3D human avatar">
+    <div className="avatar3d-stage" aria-label="Cinematic interactive 3D student developer profile">
       <div className="avatar3d-vignette" />
-      <div className="avatar3d-orbit-label"><span /> REAL-TIME 3D MODEL</div>
+      <div className="avatar3d-grain" />
+      <div className="avatar3d-topline">
+        <div className="avatar3d-orbit-label"><span /> DIGITAL IDENTITY / 2026</div>
+        <div className="avatar3d-live-tag">● AVAILABLE TO LEARN</div>
+      </div>
       <div className="avatar3d-canvas" ref={mountRef} />
-      {modelStatus === 'loading' && <div className="avatar3d-loading">INITIALIZING AVATAR<span>...</span></div>}
+      {modelStatus === 'loading' && <div className="avatar3d-loading">LOADING 3D AVATAR<span>...</span></div>}
       {modelStatus === 'error' && (
         <div className="avatar3d-loading avatar3d-error">
           3D MODEL COULD NOT LOAD
           <small>Check your internet connection and refresh.</small>
         </div>
       )}
-      <div className="avatar3d-caption"><strong>ASHU</strong><span>CREATIVE DEVELOPER</span></div>
-      <div className="avatar3d-coordinate">FIG. 01 / HUMAN INTERFACE</div>
+      <div className="avatar3d-side-data avatar3d-side-left">
+        <span className="avatar3d-index">01 / PROFILE</span>
+        <strong>THE BUILDER</strong>
+        <span className="avatar3d-rule" />
+        <span>Curious mind.</span>
+        <span>Building the future.</span>
+      </div>
+      <div className="avatar3d-side-data avatar3d-side-right">
+        <span className="avatar3d-index">02 / CURRENTLY</span>
+        <strong>B.TECH</strong>
+        <span>Computer Science</span>
+        <span>& Technology</span>
+        <span className="avatar3d-rule" />
+        <span>ARKA JAIN</span>
+        <span>UNIVERSITY</span>
+      </div>
+      <div className="avatar3d-student-card">
+        <div className="avatar3d-student-monogram">AS<span>✦</span></div>
+        <div className="avatar3d-student-info">
+          <span className="avatar3d-index">STUDENT / DEVELOPER</span>
+          <strong>{profile.name}</strong>
+          <span>B.Tech · Computer Science & Technology</span>
+          <span>Arka Jain University · Batch 2025–29</span>
+        </div>
+        <div className="avatar3d-student-status"><i /> LEARNING</div>
+      </div>
+      <div className="avatar3d-contact-strip">
+        <a href={profile.github} target="_blank" rel="noreferrer">GITHUB ↗</a>
+        <a href={profile.linkedin} target="_blank" rel="noreferrer">LINKEDIN ↗</a>
+        <a href={`mailto:${profile.email}`}>EMAIL ↗</a>
+      </div>
+      <div className="avatar3d-coordinate">JAMSHEDPUR, INDIA · FIG. 01</div>
     </div>
   )
 }
