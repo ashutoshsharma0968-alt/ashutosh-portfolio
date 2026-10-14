@@ -1095,3 +1095,59 @@ body {
   }
 }
 
+
+
+/* ===== Interactive 3D profile avatar (uses existing /profile.png) ===== */
+.profile-orbit {
+  perspective: 900px;
+  transform-style: preserve-3d;
+}
+.profile-3d-frame {
+  position: relative;
+  z-index: 2;
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  will-change: transform;
+  isolation: isolate;
+}
+.profile-3d-frame::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  z-index: -1;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 245, 255, 0.7);
+  box-shadow: 0 0 22px rgba(0, 245, 255, 0.22), inset 0 0 18px rgba(255, 60, 172, 0.12);
+  transform: translateZ(-14px);
+}
+.profile-3d-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255,255,255,.23), transparent 36%, transparent 70%, rgba(0,245,255,.16));
+  box-shadow: inset -8px -9px 18px rgba(0,0,0,.24), inset 5px 5px 12px rgba(255,255,255,.08);
+  transform: translateZ(16px);
+}
+.profile-3d-frame .profile-photo {
+  position: relative;
+  width: 132px;
+  height: 132px;
+  margin: 0;
+  transform: translateZ(10px);
+  backface-visibility: hidden;
+}
+@media (max-width: 650px) {
+  .profile-3d-frame,
+  .profile-3d-frame .profile-photo {
+    width: 116px;
+    height: 116px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .profile-3d-frame { will-change: auto; }
+}
