@@ -187,9 +187,6 @@ export default function Home() {
               </motion.div>
             </motion.div>
 
-            <span className="orbit-spark spark-one" />              </motion.div>
-            </motion.div>
-
             <span className="orbit-spark spark-one" />
             <span className="orbit-spark spark-two" />
           </motion.div>
