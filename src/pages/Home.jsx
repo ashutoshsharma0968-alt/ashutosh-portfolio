@@ -19,6 +19,7 @@ import {
 } from 'lucide-react'
 import { profile, projects, skillGroups } from '../data'
 import ProjectCard from '../components/ProjectCard'
+import Avatar3D from '../components/Avatar3D'
 
 const particles = Array.from({ length: 24 }, (_, i) => ({
   id: i,
@@ -288,47 +289,7 @@ export default function Home() {
           <div className="cyber-crosshair crosshair-one">+</div>
           <div className="cyber-crosshair crosshair-two">+</div>
 
-          <motion.div
-            className="art-card cyber-art-card"
-            animate={{ y: [0, -9, 0], rotateZ: [-2, -3.5, -2] }}
-            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            whileHover={{
-              scale: 1.035,
-              rotateZ: 0,
-              boxShadow: '0 0 65px rgba(0,245,255,0.2)',
-            }}
-          >
-            <div className="art-window">
-              <span />
-              <span />
-              <span />
-              <small>ashu.jsx</small>
-            </div>
-
-            <div className="code-lines">
-              <p><em>const</em> developer = {'{'}</p>
-              <p className="indent">
-                <b>name:</b> <i>'Ashutosh'</i>,
-              </p>
-              <p className="indent">
-                <b>focus:</b> <i>'Full-stack'</i>,
-              </p>
-              <p className="indent">
-                <b>curiosity:</b> <i>true</i>
-              </p>
-              <p>{'}'}</p>
-
-              <div className="code-divider" />
-
-              <p><em>function</em> <strong>buildFuture</strong>() {'{'}</p>
-              <p className="indent">
-                return <i>'keep building'</i>;
-              </p>
-              <p>{'}'}</p>
-
-              <span className="cursor-block" />
-            </div>
-          </motion.div>
+          <Avatar3D />
 
           <motion.div
             className="float-chip chip-code cyber-chip"
