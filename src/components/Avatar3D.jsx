@@ -133,7 +133,48 @@ export default function Avatar3D() {
         setModelStatus('ready')
       },
       undefined,
-      () => { if (!disposed) setModelStatus('error') }
+      () => {
+        if (disposed) return
+        // Keep the avatar area populated even if the external GLB host is unavailable.
+        const fallback = new THREE.Group()
+        const mat = (color, roughness = 0.72) => new THREE.MeshStandardMaterial({ color, roughness, metalness: 0.04 })
+        const skin = mat(0xc98f70)
+        const hair = mat(0x211a1b)
+        const suit = mat(0x171b2d)
+        const shirt = mat(0xeaf3f7, 0.42)
+        const tie = mat(0x00cfe8, 0.38)
+        const add = (geometry, material, x, y, z, group = fallback) => {
+          const mesh = new THREE.Mesh(geometry, material)
+          mesh.position.set(x, y, z)
+          group.add(mesh)
+          return mesh
+        }
+        // Head, hair and neck
+        add(new THREE.SphereGeometry(0.31, 28, 24), skin, 0, 2.28, 0)
+        add(new THREE.SphereGeometry(0.315, 28, 18, 0, Math.PI * 2, 0, Math.PI * 0.53), hair, 0, 2.42, -0.035)
+        add(new THREE.CylinderGeometry(0.105, 0.12, 0.28, 18), skin, 0, 1.94, 0)
+        // Tailored dark blazer and white shirt
+        add(new THREE.BoxGeometry(1.18, 1.12, 0.48), suit, 0, 1.28, 0)
+        add(new THREE.BoxGeometry(0.38, 0.92, 0.035), shirt, 0, 1.34, 0.252)
+        const lapelLeft = add(new THREE.BufferGeometry(), shirt, -0.16, 1.57, 0.28)
+        lapelLeft.geometry.dispose()
+        fallback.remove(lapelLeft)
+        const tieMesh = add(new THREE.BoxGeometry(0.105, 0.55, 0.045), tie, 0, 1.31, 0.285)
+        tieMesh.rotation.z = -0.015
+        add(new THREE.SphereGeometry(0.07, 16, 12), tie, 0, 1.61, 0.29)
+        // Arms angled slightly outward, with hands
+        const armLeft = add(new THREE.CylinderGeometry(0.16, 0.13, 0.95, 18), suit, -0.72, 1.3, 0.01)
+        armLeft.rotation.z = -0.16
+        const armRight = add(new THREE.CylinderGeometry(0.13, 0.16, 0.95, 18), suit, 0.72, 1.3, 0.01)
+        armRight.rotation.z = 0.16
+        add(new THREE.SphereGeometry(0.13, 16, 12), skin, -0.79, 0.78, 0.02)
+        add(new THREE.SphereGeometry(0.13, 16, 12), skin, 0.79, 0.78, 0.02)
+        fallback.position.y = -0.08
+        fallback.userData.isFallbackAvatar = true
+        model = fallback
+        scene.add(model)
+        setModelStatus('ready')
+      }
     )
 
     const animate = () => {
