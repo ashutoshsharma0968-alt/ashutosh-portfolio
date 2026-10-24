@@ -1996,3 +1996,49 @@ body::after {
       url("https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1200&q=85");
   }
 }
+
+
+/* FULL-PAGE STADIUM BACKDROP: keep it visible behind every section */
+html, body, #root { min-height:100%; background-color:#06100a; }
+body {
+  background:
+    linear-gradient(180deg, rgba(3,9,7,.48) 0%, rgba(3,10,7,.34) 34%, rgba(3,10,7,.54) 70%, rgba(3,8,6,.76) 100%),
+    linear-gradient(90deg, rgba(2,7,5,.42), rgba(2,8,5,.12) 50%, rgba(2,7,5,.42)),
+    url("https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=2400&q=90")
+    center center / cover fixed no-repeat !important;
+  isolation:auto;
+}
+body::before, body::after { content:none !important; display:none !important; }
+.site-shell, .heavy-home, main {
+  background:transparent !important;
+  background-color:transparent !important;
+}
+.heavy-hero {
+  background:linear-gradient(100deg,rgba(3,9,7,.24),rgba(3,9,7,.08),rgba(3,9,7,.22)) !important;
+}
+.heavy-marquee {
+  background:rgba(3,12,7,.62) !important;
+  backdrop-filter:blur(5px);
+}
+.heavy-section, .heavy-work, .heavy-toolkit {
+  background:transparent !important;
+}
+.heavy-manifesto {
+  background:linear-gradient(110deg,rgba(3,13,8,.76),rgba(4,12,10,.62)) !important;
+  backdrop-filter:blur(2px);
+}
+.heavy-contact {
+  background:linear-gradient(110deg,rgba(3,11,7,.76),rgba(4,10,10,.66)) !important;
+}
+.about-page-v2, .projects-page-v2, .contact-page-v2 {
+  background:transparent !important;
+}
+@media (max-width:700px) {
+  body {
+    background-attachment:scroll !important;
+    background-position:center center;
+    background-image:
+      linear-gradient(180deg,rgba(3,9,7,.57),rgba(3,10,7,.48) 45%,rgba(3,8,6,.78)),
+      url("https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1200&q=85") !important;
+  }
+}
