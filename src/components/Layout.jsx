@@ -22,6 +22,6 @@ export default function Layout({ children }) {
       </nav>
     </header>
     <main>{children}</main>
-    <footer className="footer"><span>© {new Date().getFullYear()} {profile.shortName}</span><span>Built with curiosity <span className="accent">✳</span> and React</span><a href="#top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Back to top ↑</a></footer>
+    <footer className="footer"><span>© {new Date().getFullYear()} {profile.shortName}</span><span>Built with code <span className="accent">✳</span> powered by cricket energy</span><a href="#top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Back to top ↑</a></footer>
   </div>
 }
