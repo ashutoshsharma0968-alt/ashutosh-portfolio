@@ -1878,3 +1878,78 @@ body {
  .about-page-v2,.projects-page-v2,.contact-page-v2 { padding-top:35px;padding-bottom:70px; }.about-index-line { font-size:6px;gap:10px;margin-bottom:32px; }.about-intro-v2 .page-title,.projects-intro-v2 .page-title,.contact-intro-v2 .page-title { font-size:clamp(43px,11vw,65px); }.about-story-grid { grid-template-columns:1fr;margin:40px 0 65px;gap:12px; }.about-story-card { min-height:300px;padding:22px; }.about-story-wide { grid-column:auto;min-height:0; }.about-story-card h2 { font-size:35px; }.cricket-stumps { right:20px;bottom:20px; }.about-pill-row span,.contact-personal-tags span { padding:9px 10px;font-size:9px; }
  .projects-metrics>div { grid-template-columns:1fr;gap:7px;padding:13px 8px 13px 0; }.projects-metrics>div+div { padding-left:10px; }.projects-metrics strong { font-size:18px; }.projects-metrics span { font-size:6px;line-height:1.5; }.projects-note-v2 { padding:17px;gap:12px; }.projects-note-icon { flex-basis:34px;height:34px; }.projects-note-v2 strong { font-size:11px; }.contact-page-v2 .contact-layout { gap:18px; }
 }
+
+
+/* GLOBAL CRICKET GROUND BACKGROUND — visible across every route */
+:root {
+  --bg: #07110d;
+  --panel: rgba(8, 17, 14, .82);
+  --line: rgba(206, 239, 218, .13);
+}
+html { background: #050a08; }
+body {
+  position: relative;
+  isolation: isolate;
+  background: #050a08 !important;
+}
+body::before {
+  content: "";
+  position: fixed;
+  z-index: -2;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(180deg, rgba(3, 9, 8, .68) 0%, rgba(3, 10, 8, .55) 38%, rgba(3, 9, 8, .82) 100%),
+    linear-gradient(90deg, rgba(3, 8, 8, .68), rgba(4, 13, 10, .28) 48%, rgba(3, 8, 8, .62)),
+    url("https://www.etplofficial.com/uploads/bg-stadium-dark.jpg");
+  background-size: cover;
+  background-position: center 45%;
+  background-repeat: no-repeat;
+  transform: translateZ(0);
+}
+body::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 82%, rgba(22, 119, 67, .22), transparent 42%),
+    linear-gradient(180deg, transparent 65%, rgba(5, 17, 10, .42));
+}
+.site-shell {
+  position: relative;
+  background: linear-gradient(180deg, rgba(4, 9, 11, .13), rgba(3, 10, 7, .2));
+}
+.topbar {
+  background: rgba(3, 10, 8, .72) !important;
+  border-bottom-color: rgba(184, 229, 199, .15);
+}
+.heavy-hero, .hero, .about-intro-v2, .projects-intro-v2, .contact-intro-v2 {
+  position: relative;
+}
+.heavy-hero::before, .hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 -8vw;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 55%, rgba(5, 18, 11, .1), rgba(4, 10, 8, .35) 68%, transparent 100%);
+}
+.heavy-section, .about-story-card, .skill-panel, .project-card, .contact-note-v2 {
+  backdrop-filter: blur(8px);
+}
+.cricket-section {
+  background: linear-gradient(110deg, rgba(4, 16, 11, .86), rgba(5, 13, 12, .76)), url("https://www.etplofficial.com/uploads/bg-stadium-dark.jpg") center 55% / cover no-repeat !important;
+}
+@media (max-width: 700px) {
+  body::before {
+    background-position: 52% center;
+    background-image:
+      linear-gradient(180deg, rgba(3, 9, 8, .76), rgba(3, 10, 8, .66) 45%, rgba(3, 9, 8, .87)),
+      url("https://www.etplofficial.com/uploads/bg-stadium-dark.jpg");
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body::before { transform: none; }
+}
