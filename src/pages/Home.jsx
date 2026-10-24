@@ -320,6 +320,24 @@ export default function Home() {
         </a>
       </section>
 
+      <section className="proof-strip section-wrap" aria-label="Portfolio highlights">
+        <div className="proof-item">
+          <span className="proof-number">03<span>+</span></span>
+          <span className="proof-label">PROJECTS IN PROGRESS</span>
+        </div>
+        <div className="proof-divider" />
+        <div className="proof-item">
+          <span className="proof-number">AI<span>.</span></span>
+          <span className="proof-label">REAL-WORLD EXPERIMENTS</span>
+        </div>
+        <div className="proof-divider" />
+        <div className="proof-item">
+          <span className="proof-number">24<span>/7</span></span>
+          <span className="proof-label">CURIOSITY MODE</span>
+        </div>
+        <div className="proof-note"><span className="proof-live-dot" /> CURRENTLY LEARNING & BUILDING</div>
+      </section>
+
       <section className="ticker cyber-ticker" aria-label="Areas of interest">
         <div>
           FRONTEND DEVELOPMENT <span>✳</span> BACKEND SYSTEMS <span>✳</span>
