@@ -22,8 +22,8 @@ export default function Avatar3D() {
 
     const scene = new THREE.Scene()
     const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100)
-    camera.position.set(0, 1.7, 5.2)
-    camera.lookAt(0, 1.05, 0)
+    camera.position.set(0, 1.65, 7.1)
+    camera.lookAt(0, 1.22, 0)
 
     try {
       renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' })
