@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import { profile } from '../data'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
-const MODEL_URL = 'https://threejs.org/examples/models/gltf/Xbot.glb'
+const MODEL_URL = 'https://threejs.org/examples/models/gltf/Soldier.glb'
 
 export default function Avatar3D() {
   const mountRef = useRef(null)
@@ -171,7 +171,7 @@ export default function Avatar3D() {
   }, [])
 
   return (
-    <div className="avatar3d-stage" aria-label="Cinematic interactive 3D student developer profile">
+    <div className="avatar3d-stage" aria-label="Interactive human-style 3D student developer avatar">
       <div className="avatar3d-vignette" />
       <div className="avatar3d-grain" />
       <div className="avatar3d-topline">
@@ -179,10 +179,10 @@ export default function Avatar3D() {
         <div className="avatar3d-live-tag">● AVAILABLE TO LEARN</div>
       </div>
       <div className="avatar3d-canvas" ref={mountRef} />
-      {modelStatus === 'loading' && <div className="avatar3d-loading">LOADING 3D AVATAR<span>...</span></div>}
+      {modelStatus === 'loading' && <div className="avatar3d-loading">LOADING HUMAN 3D MODEL<span>...</span></div>}
       {modelStatus === 'error' && (
         <div className="avatar3d-loading avatar3d-error">
-          3D MODEL COULD NOT LOAD
+          HUMAN 3D MODEL COULD NOT LOAD
           <small>Check your internet connection and refresh.</small>
         </div>
       )}
