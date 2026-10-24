@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import { profile } from '../data'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
-const MODEL_URL = 'https://threejs.org/examples/models/gltf/Soldier.glb'
+const MODEL_URL = 'https://readyplayerme.github.io/visage/male.glb'
 
 export default function Avatar3D() {
   const mountRef = useRef(null)
@@ -25,7 +25,8 @@ export default function Avatar3D() {
 
     const scene = new THREE.Scene()
     const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100)
-    camera.position.set(0, 1.8, 8.4)
+    camera.position.set(0, 1.7, 5.2)
+    camera.lookAt(0, 1.05, 0)
 
     try {
       renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' })
@@ -38,7 +39,7 @@ export default function Avatar3D() {
     renderer.setSize(mount.clientWidth || 520, mount.clientHeight || 560)
     renderer.outputColorSpace = THREE.SRGBColorSpace
     renderer.toneMapping = THREE.ACESFilmicToneMapping
-    renderer.toneMappingExposure = 1.18
+    renderer.toneMappingExposure = 1.3
     renderer.setClearColor(0x000000, 0)
     mount.appendChild(renderer.domElement)
 
@@ -171,7 +172,7 @@ export default function Avatar3D() {
   }, [])
 
   return (
-    <div className="avatar3d-stage" aria-label="Interactive human-style 3D student developer avatar">
+    <div className="avatar3d-stage" aria-label="Cinematic half-body human 3D student developer avatar">
       <div className="avatar3d-vignette" />
       <div className="avatar3d-grain" />
       <div className="avatar3d-topline">
@@ -179,7 +180,7 @@ export default function Avatar3D() {
         <div className="avatar3d-live-tag">● AVAILABLE TO LEARN</div>
       </div>
       <div className="avatar3d-canvas" ref={mountRef} />
-      {modelStatus === 'loading' && <div className="avatar3d-loading">LOADING HUMAN 3D MODEL<span>...</span></div>}
+      {modelStatus === 'loading' && <div className="avatar3d-loading">LOADING 3D DEVELOPER AVATAR<span>...</span></div>}
       {modelStatus === 'error' && (
         <div className="avatar3d-loading avatar3d-error">
           HUMAN 3D MODEL COULD NOT LOAD
