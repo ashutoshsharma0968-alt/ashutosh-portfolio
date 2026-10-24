@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { profile } from '../data'
 
 export default function Avatar3D() {
@@ -204,6 +205,50 @@ export default function Avatar3D() {
     modelBaseY = avatar.position.y
     scene.add(avatar)
     setModelStatus('ready')
+
+    // Load a textured, natural-proportioned human character for the cinematic hero.
+    // The locally-built avatar above stays visible as a fallback if the asset host is unavailable.
+    const humanLoader = new GLTFLoader()
+    humanLoader.load(
+      'https://www.innerscene.com/api/library/one-hand-on-hip-3d-person-standing-7d13068a/download',
+      (gltf) => {
+        if (disposed) {
+          gltf.scene.traverse((object) => {
+            if (object.geometry) object.geometry.dispose()
+          })
+          return
+        }
+        const human = gltf.scene
+        const bounds = new THREE.Box3().setFromObject(human)
+        const size = bounds.getSize(new THREE.Vector3())
+        const center = bounds.getCenter(new THREE.Vector3())
+        const desiredHeight = 3.45
+        human.scale.setScalar(desiredHeight / Math.max(size.y, 0.01))
+        human.position.x = -center.x * human.scale.x
+        human.position.y = -bounds.min.y * human.scale.y - 0.55
+        human.position.z = -center.z * human.scale.z
+        human.traverse((object) => {
+          if (object.isMesh) {
+            object.castShadow = true
+            object.receiveShadow = true
+            if (object.material) {
+              object.material.needsUpdate = true
+              if ('roughness' in object.material) object.material.roughness = Math.min(object.material.roughness ?? 0.7, 0.78)
+            }
+          }
+        })
+        scene.remove(avatar)
+        model = human
+        modelBaseY = human.position.y
+        scene.add(human)
+        setModelStatus('ready')
+      },
+      undefined,
+      () => {
+        // Keep the custom fallback visible if the hosted GLB cannot be fetched.
+        setModelStatus('ready')
+      }
+    )
 
     const animate = () => {
       frameId = requestAnimationFrame(animate)
