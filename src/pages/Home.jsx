@@ -1,468 +1,124 @@
-
-import { useRef } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-} from 'framer-motion'
-import {
-  ArrowDownRight,
-  ArrowRight,
-  ArrowUpRight,
-  Code2,
-  Github,
-  Linkedin,
-  Sparkles,
-  Zap,
+  ArrowDown, ArrowRight, ArrowUpRight, Github, Linkedin, Mail,
+  Code2, Layers3, Sparkles, Terminal, Cpu, ExternalLink
 } from 'lucide-react'
 import { profile, projects, skillGroups } from '../data'
 import ProjectCard from '../components/ProjectCard'
 import Avatar3D from '../components/Avatar3D'
 
-const particles = Array.from({ length: 14 }, (_, i) => ({
-  id: i,
-  left: `${(i * 37 + 11) % 100}%`,
-  top: `${(i * 53 + 7) % 100}%`,
-  delay: `${(i % 8) * 0.35}s`,
-  duration: `${4 + (i % 6)}s`,
-  size: i % 5 === 0 ? 4 : 2,
-}))
-
-const titleTransition = {
-  duration: 0.45,
-  ease: 'easeOut',
+const rise = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: 'easeOut' } },
 }
 
-function GlitchText({ text, delay = 0 }) {
-  return (
-    <span className="cyber-word" aria-label={text}>
-      {Array.from(text).map((char, index) => (
-        <motion.span
-          className="cyber-letter"
-          key={`${char}-${index}`}
-          aria-hidden="true"
-          initial={{
-            opacity: 0,
-            y: 35,
-            rotateX: -75,
-            filter: 'blur(8px)',
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-            rotateX: 0,
-            filter: 'blur(0px)',
-          }}
-          transition={{
-            ...titleTransition,
-            delay: delay + index * 0.045,
-          }}
-        >
-          {char === ' ' ? '\u00A0' : char}
-        </motion.span>
-      ))}
-    </span>
-  )
-}
-
-const reveal = {
-  hidden: { opacity: 0, y: 45, filter: 'blur(8px)' },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 0.75, ease: 'easeOut' },
-  },
-}
+const stack = ['REACT', 'JAVASCRIPT', 'NODE.JS', 'EXPRESS', 'MONGODB', 'AI EXPERIMENTS', 'UI ENGINEERING']
 
 export default function Home() {
-  const heroRef = useRef(null)
-
-  const pointerX = useMotionValue(0)
-  const pointerY = useMotionValue(0)
-
-  const smoothX = useSpring(pointerX, {
-    stiffness: 65,
-    damping: 20,
-    mass: 0.6,
-  })
-
-  const smoothY = useSpring(pointerY, {
-    stiffness: 65,
-    damping: 20,
-    mass: 0.6,
-  })
-
-  const glowX = useTransform(smoothX, [-1, 1], ['-15%', '115%'])
-  const glowY = useTransform(smoothY, [-1, 1], ['-15%', '115%'])
-  const avatarRotateX = useTransform(smoothY, [-1, 1], [10, -10])
-  const avatarRotateY = useTransform(smoothX, [-1, 1], [-14, 14])
-
-  function handleMouseMove(event) {
-    if (!heroRef.current) return
-
-    const rect = heroRef.current.getBoundingClientRect()
-
-    pointerX.set(((event.clientX - rect.left) / rect.width) * 2 - 1)
-    pointerY.set(((event.clientY - rect.top) / rect.height) * 2 - 1)
-  }
-
-  function handleMouseLeave() {
-    pointerX.set(0)
-    pointerY.set(0)
-  }
+  const [activeTab, setActiveTab] = useState('Overview')
 
   return (
-    <>
-      <section
-        className="hero section-wrap cyber-hero"
-        id="top"
-        ref={heroRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-      >
-        <div className="cyber-grid-overlay" aria-hidden="true" />
+    <main className="heavy-home">
+      <section className="heavy-hero" id="top">
+        <div className="heavy-hero-grid" aria-hidden="true" />
+        <div className="heavy-hero-glow heavy-glow-a" aria-hidden="true" />
+        <div className="heavy-hero-glow heavy-glow-b" aria-hidden="true" />
 
-        <motion.div
-          className="cyber-cursor-glow"
-          style={{ left: glowX, top: glowY }}
-          aria-hidden="true"
-        />
-
-        <div className="cyber-particles" aria-hidden="true">
-          {particles.map((particle) => (
-            <span
-              key={particle.id}
-              className="cyber-particle"
-              style={{
-                left: particle.left,
-                top: particle.top,
-                width: particle.size,
-                height: particle.size,
-                animationDelay: particle.delay,
-                animationDuration: particle.duration,
-              }}
-            />
-          ))}
-        </div>
-
-        <div className="hero-copy cyber-hero-copy">
-          <motion.div
-            className="profile-orbit"
-            initial={{ opacity: 0, scale: 0.5, rotate: -90 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 1, ease: 'easeOut' }}
-          >
-            <div className="profile-orbit-ring orbit-a" />
-            <div className="profile-orbit-ring orbit-b" />
-            <div className="profile-orbit-ring orbit-c" />
-
-            <motion.div
-              className="profile-3d-frame"
-              style={{ rotateX: avatarRotateX, rotateY: avatarRotateY }}
-              animate={{ y: [0, -8, 0] }}
-              transition={{ y: { duration: 4.2, repeat: Infinity, ease: 'easeInOut' } }}
-              whileHover={{ scale: 1.045 }}
-            >
-              <motion.div
-                className="developer-avatar-3d"
-                role="img"
-                aria-label="Interactive 3D portrait using Ashu's existing profile photo"
-                initial={{ opacity: 0, scale: 0.65, filter: 'blur(12px)' }}
-                animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                transition={{ duration: 0.9, delay: 0.2 }}
-              >
-                <span className="avatar-depth-shadow" />
-                <span className="avatar-photo-backplate" />
-                <img
-                  className="real-human-avatar-photo"
-                  src="/profile.png"
-                  alt="Ashu"
-                  draggable="false"
-                />
-                <span className="avatar-photo-glass" />
-                <span className="avatar-photo-rim" />
-                <span className="avatar-photo-label">ASHU.DEV</span>
-              </motion.div>
-            </motion.div>
-
-            <span className="orbit-spark spark-one" />
-            <span className="orbit-spark spark-two" />
+        <div className="heavy-hero-inner">
+          <motion.div className="heavy-intro" initial="hidden" animate="visible" variants={rise}>
+            <div className="heavy-overline"><span className="heavy-live-dot" /> PORTFOLIO / 2026 <span className="heavy-overline-line" /> JAMSHEDPUR, INDIA</div>
+            <p className="heavy-kicker">COMPUTER SCIENCE STUDENT <span>·</span> DEVELOPER IN PROGRESS</p>
+            <h1 className="heavy-title">
+              I turn<br />
+              <span className="heavy-title-outline">curiosity</span> into<br />
+              <span className="heavy-title-gradient">digital impact.</span>
+            </h1>
+            <p className="heavy-lede">
+              I'm <strong>{profile.name}</strong> — a B.Tech student who loves building thoughtful web experiences, full-stack products, and practical AI experiments.
+            </p>
+            <div className="heavy-actions">
+              <Link className="heavy-btn heavy-btn-primary" to="/projects">Explore selected work <ArrowUpRight size={17} /></Link>
+              <Link className="heavy-btn heavy-btn-secondary" to="/contact">Start a conversation <ArrowRight size={16} /></Link>
+            </div>
+            <div className="heavy-socials">
+              <a href={profile.github} target="_blank" rel="noreferrer"><Github size={16} /> GitHub <ExternalLink size={12} /></a>
+              <a href={profile.linkedin} target="_blank" rel="noreferrer"><Linkedin size={16} /> LinkedIn <ExternalLink size={12} /></a>
+              <a href={`mailto:${profile.email}`}><Mail size={16} /> Email</a>
+            </div>
+            <div className="heavy-scroll-note"><ArrowDown size={14} /> SCROLL TO EXPLORE</div>
           </motion.div>
 
-          <motion.div
-            className="eyebrow cyber-eyebrow"
-            initial={{ opacity: 0, x: -25 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.25 }}
-          >
-            <span className="availability-dot" />
-            <span>OPEN TO LEARNING & OPPORTUNITIES</span>
-          </motion.div>
-
-          <motion.h1
-            className="cyber-headline"
-            aria-label="Building ideas into digital reality."
-            initial="hidden"
-            animate="visible"
-          >
-            <span className="headline-line">
-              <GlitchText text="Building ideas" delay={0.3} />
-            </span>
-            <br />
-            <span className="headline-line">
-              <span className="headline-into">into </span>
-              <span className="gradient-text cyber-gradient">
-                <GlitchText text="digital reality." delay={0.95} />
-              </span>
-            </span>
-          </motion.h1>
-
-          <motion.p
-            className="hero-description cyber-description"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.35, duration: 0.65 }}
-          >
-            Hey, I'm <strong>{profile.name}</strong> — a Computer Science
-            student exploring full-stack development, thoughtful UI, and
-            AI-powered solutions.
-          </motion.p>
-
-          <motion.div
-            className="hero-actions"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.5, duration: 0.6 }}
-          >
-            <Link className="button button-primary cyber-button" to="/projects">
-              Explore my work <ArrowUpRight size={17} />
-            </Link>
-
-            <Link className="button button-ghost cyber-button-ghost" to="/contact">
-              Let's connect <ArrowRight size={16} />
-            </Link>
-          </motion.div>
-
-          <motion.div
-            className="social-row"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.7 }}
-          >
-            <a href={profile.linkedin} target="_blank" rel="noreferrer">
-              <Linkedin size={16} /> LinkedIn <ArrowUpRight size={13} />
-            </a>
-
-            <a href={profile.github} target="_blank" rel="noreferrer">
-              <Github size={16} /> GitHub <ArrowUpRight size={13} />
-            </a>
-
-            <span className="social-separator" />
-
-            <span className="location-label">⌖ {profile.location}</span>
-          </motion.div>
-
-          <motion.div
-            className="cyber-status"
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1.9 }}
-          >
-            <Zap size={13} />
-            <span>IDEAS INTO INTERACTIVE EXPERIENCES</span>
+          <motion.div className="heavy-visual" initial={{ opacity: 0, x: 35, scale: .96 }} animate={{ opacity: 1, x: 0, scale: 1 }} transition={{ duration: .9, delay: .15 }}>
+            <div className="heavy-visual-label"><span>FIG. 01</span><span>INTERACTIVE DIGITAL IDENTITY</span></div>
+            <div className="heavy-visual-frame">
+              <div className="heavy-corner heavy-corner-tl" /><div className="heavy-corner heavy-corner-tr" />
+              <div className="heavy-corner heavy-corner-bl" /><div className="heavy-corner heavy-corner-br" />
+              <div className="heavy-visual-orbit" />
+              <Avatar3D />
+              <div className="heavy-float-tag heavy-float-code"><Code2 size={15} /> BUILD / SHIP / LEARN</div>
+              <div className="heavy-float-tag heavy-float-ai"><Sparkles size={15} /> AI × WEB</div>
+            </div>
+            <div className="heavy-visual-footer"><span>ASHUTOSH SHARMA</span><span>STUDENT / BUILDER / EXPLORER</span></div>
           </motion.div>
         </div>
 
-        <motion.div
-          className="hero-art cyber-hero-art"
-          initial={{ opacity: 0, scale: 0.75, rotateY: 18, rotateZ: 3 }}
-          animate={{ opacity: 1, scale: 1, rotateY: 0, rotateZ: 0 }}
-          transition={{ duration: 1.1, delay: 0.3, ease: 'easeOut' }}
-          aria-label="Decorative developer illustration"
-        >
-          <div className="cyber-art-glow" />
-          <div className="art-ring ring-one" />
-          <div className="art-ring ring-two" />
-          <div className="cyber-crosshair crosshair-one">+</div>
-          <div className="cyber-crosshair crosshair-two">+</div>
-
-          <Avatar3D />
-
-          <motion.div
-            className="float-chip chip-code cyber-chip"
-            animate={{ y: [0, -12, 0], x: [0, 4, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <Code2 size={17} /> Clean code
-          </motion.div>
-
-          <motion.div
-            className="float-chip chip-spark cyber-chip"
-            animate={{ y: [0, 10, 0], x: [0, -4, 0] }}
-            transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <Sparkles size={16} /> Curious by nature
-          </motion.div>
-
-          <div className="cyber-coordinate">23° N / 85° E</div>
-
-          <div className="art-caption">
-            DESIGN <span>×</span> CODE <span>×</span> IMPACT
-          </div>
-        </motion.div>
-
-        <a href="#featured" className="scroll-cue cyber-scroll">
-          <ArrowDownRight size={16} /> SCROLL TO EXPLORE
-          <span className="scroll-line" />
-        </a>
+        <div className="heavy-bottom-index"><span>01</span> — THE INTRODUCTION <span className="heavy-bottom-rule" /> SCROLL TO DISCOVER <ArrowDown size={13} /></div>
       </section>
 
-      <section className="proof-strip section-wrap" aria-label="Portfolio highlights">
-        <div className="proof-item">
-          <span className="proof-number">03<span>+</span></span>
-          <span className="proof-label">PROJECTS IN PROGRESS</span>
-        </div>
-        <div className="proof-divider" />
-        <div className="proof-item">
-          <span className="proof-number">AI<span>.</span></span>
-          <span className="proof-label">REAL-WORLD EXPERIMENTS</span>
-        </div>
-        <div className="proof-divider" />
-        <div className="proof-item">
-          <span className="proof-number">24<span>/7</span></span>
-          <span className="proof-label">CURIOSITY MODE</span>
-        </div>
-        <div className="proof-note"><span className="proof-live-dot" /> CURRENTLY LEARNING & BUILDING</div>
-      </section>
+      <div className="heavy-marquee" aria-label="Technology interests"><div className="heavy-marquee-track">{[...stack, ...stack].map((item, i) => <span key={item + i}>{item}<i>✳</i></span>)}</div></div>
 
-      <section className="ticker cyber-ticker" aria-label="Areas of interest">
-        <div>
-          FRONTEND DEVELOPMENT <span>✳</span> BACKEND SYSTEMS <span>✳</span>
-          AI EXPERIMENTS <span>✳</span> PROBLEM SOLVING <span>✳</span>
-          FRONTEND DEVELOPMENT <span>✳</span> BACKEND SYSTEMS <span>✳</span>
+      <motion.section className="heavy-section heavy-work section-wrap" id="featured" initial="hidden" whileInView="visible" viewport={{ once: true, amount: .1 }} variants={rise}>
+        <div className="heavy-section-top">
+          <div><p className="heavy-section-label">01 / SELECTED WORK</p><h2>Built with intent.<br /><span>Made to matter.</span></h2></div>
+          <p className="heavy-section-description">A growing collection of products and experiments where design meets engineering. Each project is a chance to solve a real problem and learn by shipping.</p>
         </div>
-      </section>
-
-      <motion.section
-        className="section-wrap section-block"
-        id="featured"
-        variants={reveal}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.12 }}
-      >
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">01 — SELECTED WORK</p>
-            <h2>
-              Things I'm <span className="gradient-text">building.</span>
-            </h2>
-          </div>
-
-          <Link className="text-link" to="/projects">
-            All projects <ArrowUpRight size={16} />
-          </Link>
-        </div>
-
-        <div className="project-grid cyber-project-grid">
+        <div className="heavy-project-grid">
           {projects.slice(0, 3).map((project, index) => (
-            <motion.div
-              key={project.number}
-              className="cyber-project-wrap"
-              initial={{ opacity: 0, y: 55, rotateX: 8, scale: 0.94 }}
-              whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
-              viewport={{ once: true, amount: 0.15 }}
-              transition={{
-                duration: 0.65,
-                delay: index * 0.15,
-                ease: 'easeOut',
-              }}
-              whileHover={{ y: -9, scale: 1.015 }}
-            >
+            <motion.div key={project.number} className="heavy-project-item" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .12 }} transition={{ delay: index * .12, duration: .55 }}>
+              <div className="heavy-project-index"><span>{project.number}</span><span>{project.category}</span></div>
               <ProjectCard project={project} index={index} />
             </motion.div>
           ))}
         </div>
+        <div className="heavy-view-all"><span>MORE IDEAS ARE IN THE WORKS</span><Link to="/projects">View all projects <ArrowUpRight size={16} /></Link></div>
       </motion.section>
 
-      <motion.section
-        className="section-wrap section-block skills-preview"
-        variants={reveal}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.12 }}
-      >
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">02 — MY TOOLKIT</p>
-            <h2>
-              Learning by <span className="gradient-text">building.</span>
-            </h2>
+      <section className="heavy-manifesto">
+        <div className="heavy-manifesto-inner section-wrap">
+          <div className="heavy-manifesto-side"><span className="heavy-section-label">02 / THE APPROACH</span><span className="heavy-manifesto-mark">✳</span></div>
+          <div className="heavy-manifesto-copy"><p>Not just pretty screens.</p><h2>I care about the <em>details</em>, the <em>logic</em>, and the people on the other side of the screen.</h2><span className="heavy-manifesto-note">DESIGN WITH PURPOSE · CODE WITH CURIOSITY</span></div>
+        </div>
+      </section>
+
+      <motion.section className="heavy-section heavy-toolkit section-wrap" initial="hidden" whileInView="visible" viewport={{ once: true, amount: .12 }} variants={rise}>
+        <div className="heavy-section-top">
+          <div><p className="heavy-section-label">03 / THE TOOLKIT</p><h2>My current<br /><span>building blocks.</span></h2></div>
+          <p className="heavy-section-description">Tools I use and concepts I'm actively strengthening. I believe in showing the journey honestly and letting the work speak.</p>
+        </div>
+        <div className="heavy-toolkit-layout">
+          <div className="heavy-toolkit-tabs" role="tablist" aria-label="Skill categories">
+            {skillGroups.map((group, index) => <button key={group.title} className={activeTab === group.title ? 'heavy-tool-tab is-active' : 'heavy-tool-tab'} onClick={() => setActiveTab(group.title)} role="tab" aria-selected={activeTab === group.title}><span>0{index + 1}</span>{group.title}<ArrowUpRight size={14} /></button>)}
           </div>
-
-          <Link className="text-link" to="/about">
-            More about me <ArrowUpRight size={16} />
-          </Link>
+          <div className="heavy-toolkit-panel" role="tabpanel">
+            {skillGroups.filter(group => group.title === activeTab).map(group => <div key={group.title} className="heavy-toolkit-content"><div className="heavy-toolkit-heading"><Layers3 size={20} /><span>CAPABILITIES / {group.title.toUpperCase()}</span></div><h3>{group.title}<br /><span>in practice.</span></h3><div className="heavy-skill-tags">{group.items.map(item => <span key={item}>{item}</span>)}</div><p>Learning through hands-on projects, iteration, debugging, and shipping useful features.</p></div>)}
+            <div className="heavy-toolkit-watermark"><Cpu size={120} strokeWidth={.6} /></div>
+          </div>
         </div>
-
-        <div className="skill-grid">
-          {skillGroups.map((group, i) => (
-            <motion.div
-              className="skill-panel cyber-skill-panel"
-              key={group.title}
-              initial={{ opacity: 0, y: 35, rotateY: -8 }}
-              whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{
-                duration: 0.55,
-                delay: i * 0.1,
-              }}
-              whileHover={{
-                y: -7,
-                rotateY: 4,
-                rotateX: -3,
-                scale: 1.025,
-              }}
-            >
-              <span className="skill-index">0{i + 1}</span>
-              <h3>{group.title}</h3>
-
-              <div className="tag-list">
-                {group.items.map((item) => (
-                  <span key={item}>{item}</span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        <Link to="/about" className="heavy-about-link">More about my journey <ArrowRight size={16} /></Link>
       </motion.section>
 
-      <motion.section
-        className="section-wrap cta-section cyber-cta"
-        initial={{ opacity: 0, y: 50, scale: 0.97 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-      >
-        <div>
-          <p className="eyebrow">HAVE AN IDEA?</p>
-          <h2>
-            Let's make something
-            <br />
-            <span className="gradient-text">meaningful.</span>
-          </h2>
+      <section className="heavy-contact">
+        <div className="heavy-contact-grid" aria-hidden="true" />
+        <div className="heavy-contact-inner section-wrap">
+          <p className="heavy-section-label">04 / WHAT'S NEXT?</p>
+          <h2>Have a good<br /><span>problem to solve?</span></h2>
+          <p>I'm always open to learning from people who build, exploring ideas, and collaborating on meaningful projects.</p>
+          <div className="heavy-actions"><Link className="heavy-btn heavy-btn-primary" to="/contact">Let's talk <ArrowUpRight size={17} /></Link><a className="heavy-btn heavy-btn-secondary" href={profile.linkedin} target="_blank" rel="noreferrer"><Linkedin size={16} /> Connect on LinkedIn</a></div>
+          <div className="heavy-contact-signature"><span>ASHUTOSH KUMAR SHARMA</span><span>BUILT WITH CURIOSITY <Sparkles size={13} /></span></div>
         </div>
-
-        <Link to="/contact" className="button button-primary cyber-button">
-          Get in touch <ArrowUpRight size={17} />
-        </Link>
-
-        <div className="cta-glow" />
-        <div className="cyber-cta-grid" />
-      </motion.section>
-    </>
+      </section>
+    </main>
   )
 }
