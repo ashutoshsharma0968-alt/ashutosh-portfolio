@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
   ArrowDown, ArrowRight, ArrowUpRight, Github, Linkedin, Mail,
-  Code2, Layers3, Sparkles, Terminal, Cpu, ExternalLink
+  Code2, Layers3, Sparkles, Cpu, ExternalLink, Trophy, CircleDot
 } from 'lucide-react'
 import { profile, projects, skillGroups } from '../data'
 import ProjectCard from '../components/ProjectCard'
@@ -14,7 +14,7 @@ const rise = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: 'easeOut' } },
 }
 
-const stack = ['REACT', 'JAVASCRIPT', 'NODE.JS', 'EXPRESS', 'MONGODB', 'AI EXPERIMENTS', 'UI ENGINEERING']
+const stack = ['REACT', 'JAVASCRIPT', 'NODE.JS', 'EXPRESS', 'MONGODB', 'AI EXPERIMENTS', 'CRICKET FAN', 'TEAMWORK', 'UI ENGINEERING']
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('Overview')
@@ -29,14 +29,14 @@ export default function Home() {
         <div className="heavy-hero-inner">
           <motion.div className="heavy-intro" initial="hidden" animate="visible" variants={rise}>
             <div className="heavy-overline"><span className="heavy-live-dot" /> PORTFOLIO / 2026 <span className="heavy-overline-line" /> JAMSHEDPUR, INDIA</div>
-            <p className="heavy-kicker">COMPUTER SCIENCE STUDENT <span>·</span> DEVELOPER IN PROGRESS</p>
+            <p className="heavy-kicker">COMPUTER SCIENCE STUDENT <span>·</span> CRICKET FAN <span>·</span> BUILDER</p>
             <h1 className="heavy-title">
               I turn<br />
               <span className="heavy-title-outline">curiosity</span> into<br />
               <span className="heavy-title-gradient">digital impact.</span>
             </h1>
             <p className="heavy-lede">
-              I'm <strong>{profile.name}</strong> — a B.Tech student who loves building thoughtful web experiences, full-stack products, and practical AI experiments.
+              I'm <strong>{profile.name}</strong> — a B.Tech CS student, cricket fan, and aspiring full-stack developer. I love the strategy of the game and the challenge of turning ideas into working products.
             </p>
             <div className="heavy-actions">
               <Link className="heavy-btn heavy-btn-primary" to="/projects">Explore selected work <ArrowUpRight size={17} /></Link>
@@ -58,9 +58,9 @@ export default function Home() {
               <div className="heavy-visual-orbit" />
               <Avatar3D />
               <div className="heavy-float-tag heavy-float-code"><Code2 size={15} /> BUILD / SHIP / LEARN</div>
-              <div className="heavy-float-tag heavy-float-ai"><Sparkles size={15} /> AI × WEB</div>
+              <div className="heavy-float-tag heavy-float-ai"><Sparkles size={15} /> AI × WEB</div><div className="heavy-float-tag heavy-float-cricket"><Trophy size={15} /> CRICKET × CODE</div>
             </div>
-            <div className="heavy-visual-footer"><span>ASHUTOSH SHARMA</span><span>STUDENT / BUILDER / EXPLORER</span></div>
+            <div className="heavy-visual-footer"><span>ASHUTOSH SHARMA</span><span>CS STUDENT / CRICKET FAN / BUILDER</span></div>
           </motion.div>
         </div>
 
@@ -89,6 +89,26 @@ export default function Home() {
         <div className="heavy-manifesto-inner section-wrap">
           <div className="heavy-manifesto-side"><span className="heavy-section-label">02 / THE APPROACH</span><span className="heavy-manifesto-mark">✳</span></div>
           <div className="heavy-manifesto-copy"><p>Not just pretty screens.</p><h2>I care about the <em>details</em>, the <em>logic</em>, and the people on the other side of the screen.</h2><span className="heavy-manifesto-note">DESIGN WITH PURPOSE · CODE WITH CURIOSITY</span></div>
+        </div>
+      </section>
+
+
+      <section className="cricket-section">
+        <div className="cricket-inner section-wrap">
+          <div className="cricket-copy">
+            <p className="heavy-section-label">A LITTLE OFF-SCREEN / MY OTHER OBSESSION</p>
+            <div className="cricket-title-row"><span className="cricket-ball"><CircleDot size={28} /></span><h2>One heart.<br /><span>Two innings.</span></h2></div>
+            <p className="cricket-lede">When I’m not debugging code or building something for the web, there’s a good chance I’m watching cricket. I love the pressure, the patience, the strategy—and how one good partnership can change the whole game.</p>
+            <p className="cricket-bridge">Turns out, cricket and coding have a lot in common: read the situation, think a few steps ahead, trust the team, and keep showing up after a tough over.</p>
+            <Link className="cricket-link" to="/about">More about the person behind the code <ArrowRight size={16} /></Link>
+          </div>
+          <div className="cricket-scoreboard" aria-label="Cricket-inspired personal values">
+            <div className="scoreboard-top"><span>PERSONAL PLAYBOOK</span><span className="score-live"><i/> IN PROGRESS</span></div>
+            <div className="scoreboard-main"><span className="score-number">01</span><div><strong>STAY CURIOUS</strong><small>Keep learning, keep asking</small></div><Code2 /></div>
+            <div className="scoreboard-main"><span className="score-number">02</span><div><strong>PLAY THE LONG GAME</strong><small>Consistency beats shortcuts</small></div><Trophy /></div>
+            <div className="scoreboard-main"><span className="score-number">03</span><div><strong>BACK YOUR TEAM</strong><small>Build better things together</small></div><CircleDot /></div>
+            <div className="scoreboard-footer"><span>CS STUDENT</span><span>CRICKET LOVER</span><span>FUTURE BUILDER</span></div>
+          </div>
         </div>
       </section>
 
