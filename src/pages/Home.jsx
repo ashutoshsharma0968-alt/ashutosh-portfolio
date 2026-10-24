@@ -21,7 +21,7 @@ import { profile, projects, skillGroups } from '../data'
 import ProjectCard from '../components/ProjectCard'
 import Avatar3D from '../components/Avatar3D'
 
-const particles = Array.from({ length: 24 }, (_, i) => ({
+const particles = Array.from({ length: 14 }, (_, i) => ({
   id: i,
   left: `${(i * 37 + 11) % 100}%`,
   top: `${(i * 53 + 7) % 100}%`,
